@@ -2,7 +2,7 @@ This is a simple script I wrote to create Arch Linux images.
 
 I found myself creating images more than I expected, so I wrote this script to build them for me. I figured it was worth the time it would take to create the script, as it only takes a few minutes to run. Entering commands to build an image manually was rather tedius after a while.
 
-This script requires root privileges. Sudo will be insufficient for some commands, I have tried this, and it has failed.
+This script requires root privileges. You may or may not have luck using sudo to run this script.
 
 The build.sh script in the directory will build the image for you, when run as root.
 

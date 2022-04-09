@@ -35,14 +35,14 @@ check mount -o noatime ${loopdev}p1 ${imgdir}/boot
 check pacstrap -c ${imgdir} base linux syslinux efibootmgr dosfstools openssh nano ed wget rsync
 check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
 check syslinux-install_update -c ${imgdir} -i -a -m
-check cp -a ./syslinux.cfg ${imgdir}/boot/syslinux/
+check cp ./syslinux.cfg ${imgdir}/boot/syslinux/
 check chown root:root ${imgdir}/boot/syslinux/syslinux.cfg
 check mkdir -p ${imgdir}/boot/EFI/BOOT
 check cp -r ${imgdir}/usr/lib/syslinux/efi64/* ${imgdir}/boot/EFI/BOOT/
 check mv ${imgdir}/boot/EFI/BOOT/syslinux.efi ${imgdir}/boot/EFI/BOOT/bootx64.efi
-check cp -a ./syslinux.cfg ${imgdir}/boot/EFI/BOOT/syslinux.cfg
+check cp ./syslinux.cfg ${imgdir}/boot/EFI/BOOT/syslinux.cfg
 check chown root:root ${imgdir}/boot/EFI/BOOT/syslinux.cfg
-check cp -a ./network ${imgdir}/etc/systemd/
+check cp -r ./network ${imgdir}/etc/systemd/
 check chown root:root -R ${imgdir}/etc/systemd/network
 check ln -sf /run/systemd/resolve/stub-resolv.conf ${imgdir}/etc/resolv.conf
 check chroot ${imgdir} /usr/bin/passwd -d root
