@@ -51,6 +51,16 @@ echo "LABEL=AROOT / ext4 rw,noatime 0 1"
 echo "LABEL=ABOOT /boot vfat rw,noatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro 0 2"
 }
 fstabinfo >>${imgdir}/etc/fstab
+sshkeys="${HOME}/.ssh/authorized_keys"
+sshdir="${imgdir}/root/.ssh"
+if [ -f "${sshkeys}" ]; then
+echo "Copying ${sshkeys} to ${sshdir}"
+check mkdir ${sshdir}
+check cp ${sshkeys} ${sshdir}
+check chmod 700 ${sshdir}
+check chmod 600 ${sshdir}/authorized_keys
+check chown root:root -R ${sshdir}
+fi
 check sync
 check umount -R ${imgdir}
 check rm -r ${imgdir}
