@@ -2,7 +2,7 @@
 # This is designed to build an Arch Linux image
 # from Arch Linux itself. It may not work on other distributions.
 # Update all packages, then install the following to build an image:
-# arch-install-scripts syslinux parted
+# arch-install-scripts syslinux parted gptfdisk
 # These images are designed to boot on an MBR and EFI.
 # They will work with the serial console by default, which is known to work with Linode, and possibly other VM hosts.
 if [ $EUID -ne 0 ]; then
@@ -32,7 +32,7 @@ check mkdir -p ${imgdir}
 check mount -o noatime ${loopdev}p2 ${imgdir}
 check mkdir -p ${imgdir}/boot
 check mount -o noatime ${loopdev}p1 ${imgdir}/boot
-check pacstrap -c ${imgdir} base linux syslinux efibootmgr dosfstools openssh nano ed wget rsync
+check pacstrap -c ${imgdir} base linux syslinux efibootmgr dosfstools gptfdisk openssh nano ed wget rsync
 check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
 check syslinux-install_update -c ${imgdir} -i -a -m
 check cp ./syslinux.cfg ${imgdir}/boot/syslinux/
