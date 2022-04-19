@@ -30,7 +30,7 @@ check mount -o noatime ${loopdev}p1 ${imgdir}
 check pacstrap -c ${imgdir} base linux syslinux openssh nano ed wget rsync
 check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
 check syslinux-install_update -c ${imgdir} -i -a -m
-check cp ./syslinux.cfg ${imgdir}/boot/syslinux/
+check cp ./syslinux-bios.cfg ${imgdir}/boot/syslinux/syslinux.cfg
 check chown root:root ${imgdir}/boot/syslinux/syslinux.cfg
 check cp -r ./network ${imgdir}/etc/systemd/
 check chown root:root -R ${imgdir}/etc/systemd/network
