@@ -3,4 +3,5 @@ Name=eth*
 
 [Network]
 DHCP=yes
+IPv6PrivacyExtensions=false
 DNSSEC=no
