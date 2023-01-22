@@ -55,7 +55,7 @@ sshkeys="${HOME}/.ssh/authorized_keys"
 sshdir="${imgdir}/root/.ssh"
 if [ -f "${sshkeys}" ]; then
 echo "Copying ${sshkeys} to ${sshdir}"
-check mkdir ${sshdir}
+check mkdir -p ${sshdir}
 check cp ${sshkeys} ${sshdir}
 check chmod 700 ${sshdir}
 check chmod 600 ${sshdir}/authorized_keys
