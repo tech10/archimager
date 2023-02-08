@@ -26,15 +26,15 @@ check parted -s ${loopdev} set 1 boot on
 check mkfs.ext4 -m 0 -L AROOT ${loopdev}p1
 imgdir="./image"
 check mkdir -p ${imgdir}
-check mount -o noatime ${loopdev}p1 ${imgdir}
+check mount -v -o noatime ${loopdev}p1 ${imgdir}
 check pacstrap -c ${imgdir} base linux syslinux openssh nano ed wget rsync
 check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
 check syslinux-install_update -c ${imgdir} -i -a -m
-check cp ./syslinux-bios.cfg ${imgdir}/boot/syslinux/syslinux.cfg
-check chown root:root ${imgdir}/boot/syslinux/syslinux.cfg
-check cp -r ./network ${imgdir}/etc/systemd/
-check chown root:root -R ${imgdir}/etc/systemd/network
-check ln -sf /run/systemd/resolve/stub-resolv.conf ${imgdir}/etc/resolv.conf
+check cp -v ./syslinux-bios.cfg ${imgdir}/boot/syslinux/syslinux.cfg
+check chown root:root -v ${imgdir}/boot/syslinux/syslinux.cfg
+check cp -rv ./network ${imgdir}/etc/systemd/
+check chown root:root -Rv ${imgdir}/etc/systemd/network
+check ln -svf /run/systemd/resolve/stub-resolv.conf ${imgdir}/etc/resolv.conf
 check chroot ${imgdir} /usr/bin/passwd -d root
 fstabinfo() {
 echo "LABEL=AROOT / ext4 rw,noatime 0 1"
@@ -46,11 +46,11 @@ if [ -f "${sshkeys}" ]; then
 echo "Copying ${sshkeys} to ${sshdir}"
 check mkdir -p ${sshdir}
 check cp ${sshkeys} ${sshdir}
-check chmod 700 ${sshdir}
-check chmod 600 ${sshdir}/authorized_keys
-check chown root:root -R ${sshdir}
+check chmod 700 -v ${sshdir}
+check chmod 600 -v ${sshdir}/authorized_keys
+check chown root:root -Rv ${sshdir}
 fi
 check sync
-check umount -R ${imgdir}
-check rm -r ${imgdir}
-check losetup -d ${loopdev}
+check umount -Rv ${imgdir}
+check rm -rv ${imgdir}
+check losetup -vd ${loopdev}
