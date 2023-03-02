@@ -42,8 +42,8 @@ check cp -rv ${imgdir}/usr/lib/syslinux/efi64/* ${imgdir}/boot/EFI/BOOT/
 check mv -v ${imgdir}/boot/EFI/BOOT/syslinux.efi ${imgdir}/boot/EFI/BOOT/bootx64.efi
 check cp -v ./syslinux.cfg ${imgdir}/boot/EFI/BOOT/syslinux.cfg
 check chown root:root -v ${imgdir}/boot/EFI/BOOT/syslinux.cfg
-check cp -rv ./network ${imgdir}/etc/systemd/
-check chown root:root -Rv ${imgdir}/etc/systemd/network
+check cp -rv ./systemd/* ${imgdir}/etc/systemd/
+check chown root:root -Rv ${imgdir}/etc/systemd/*
 check ln -svf /run/systemd/resolve/stub-resolv.conf ${imgdir}/etc/resolv.conf
 check chroot ${imgdir} /usr/bin/passwd -d root
 fstabinfo() {
