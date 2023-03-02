@@ -1,7 +1,33 @@
 [Match]
 Name=*
 
+[Link]
+RequiredForOnline=routable
+ARP=yes
+Multicast=yes
+
 [Network]
 DHCP=yes
 IPv6PrivacyExtensions=false
-DNSSEC=no
+DNS=2606:4700:4700::1111 1.1.1.1 2606:4700:4700::1001 1.0.0.1
+LLMNR=no
+MulticastDNS=no
+LLDP=no
+EmitLLDP=no
+
+[DHCPv4]
+UseDNS=no
+UseNTP=no
+UseSIP=no
+UseHostname=no
+UseDomains=no
+
+[DHCPv6]
+UseDNS=no
+UseNTP=no
+UseHostname=no
+UseDomains=no
+
+[IPv6AcceptRA]
+UseDNS=no
+UseDomains=no
