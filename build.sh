@@ -32,7 +32,7 @@ check mkdir -p ${imgdir}
 check mount -v -o noatime ${loopdev}p2 ${imgdir}
 check mkdir -p ${imgdir}/boot
 check mount -v -o noatime ${loopdev}p1 ${imgdir}/boot
-check pacstrap -c ${imgdir} base linux syslinux efibootmgr dosfstools gptfdisk openssh nano ed wget rsync
+check pacstrap -c ${imgdir} base linux syslinux efibootmgr dosfstools gptfdisk openssh nano ed wget rsync zram-generator
 check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
 check syslinux-install_update -c ${imgdir} -i -a -m
 check cp -v ./syslinux.cfg ${imgdir}/boot/syslinux/

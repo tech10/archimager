@@ -27,7 +27,7 @@ check mkfs.ext4 -m 0 -L AROOT ${loopdev}p1
 imgdir="./image"
 check mkdir -p ${imgdir}
 check mount -v -o noatime ${loopdev}p1 ${imgdir}
-check pacstrap -c ${imgdir} base linux syslinux openssh nano ed wget rsync
+check pacstrap -c ${imgdir} base linux syslinux openssh nano ed wget rsync zram-generator
 check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
 check syslinux-install_update -c ${imgdir} -i -a -m
 check cp -v ./syslinux-bios.cfg ${imgdir}/boot/syslinux/syslinux.cfg
