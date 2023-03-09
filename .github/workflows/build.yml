@@ -1,0 +1,20 @@
+name: Build Image
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+      options: --privileged
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - name: update packages
+      run: pacman --noconfirm -Syu
+    - name: install packages
+      run: pacman --noconfirm --needed -S arch-install-scripts syslinux parted gptfdisk
+    - name: checkout
+      uses: actions/checkout@v3
+    - name: build image
+      run: ./build.sh
