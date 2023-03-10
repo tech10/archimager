@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: archlinux:base-devel
-      options: --privileged
+      options: --volume /dev:/dev --privileged
     defaults:
       run:
         shell: bash
