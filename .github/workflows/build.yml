@@ -16,5 +16,15 @@ jobs:
       run: pacman --noconfirm --needed -S arch-install-scripts syslinux parted gptfdisk dosfstools git
     - name: checkout
       uses: actions/checkout@v3
-    - name: build image
+    - name: build hybred image
       run: ./build.sh
+    - name: compress hybred image
+      run: |
+        ./compress.sh
+        mv ./arch.img.gz ./arch-hybred.img.gz
+    - name: build bios image
+      run: ./build-bios.sh
+    - name: compress bios image
+      run: |
+        ./compress.sh
+        mv ./arch.img.gz ./arch-bios.img.gz
