@@ -9,3 +9,5 @@ The build.sh script in the directory will build the image for you, when run as r
 It is best to clone this repository, then copy the files within over to a new directory where you will build your images, unless I some day create a GitHub action to build images upon a manual run and publish them to a release.
 
 The compress.sh script will compress the built image.
+
+If you see a release, the downloaded images will likely be compressed in .gz format. I will only ever publish one release here at a time, all other releases will be deleted, so as to respect GitHub limits on the use of space.
