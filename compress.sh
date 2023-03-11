@@ -1,2 +1,2 @@
 #!/bin/sh
-gzip -k -v -9 ./arch.img
+pigz -k -v -9 ./arch.img

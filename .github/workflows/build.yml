@@ -19,7 +19,7 @@ jobs:
     - name: update packages
       run: pacman --noconfirm -Syu
     - name: install packages
-      run: pacman --noconfirm --needed -S arch-install-scripts syslinux parted gptfdisk dosfstools git nodejs-lts-gallium
+      run: pacman --noconfirm --needed -S arch-install-scripts syslinux parted gptfdisk dosfstools pigz git nodejs-lts-gallium
     - name: checkout
       uses: actions/checkout@v3
     - name: build hybred image
@@ -28,12 +28,14 @@ jobs:
       run: |
         ./compress.sh
         mv ./arch.img.gz ./arch-hybred.img.gz
+        rm ./arch.img
     - name: build bios image
       run: ./build-bios.sh
     - name: compress bios image
       run: |
         ./compress.sh
         mv ./arch.img.gz ./arch-bios.img.gz
+        rm ./arch.img
     - name: Create and Upload Release
       if: contains(github.ref, '/tags/')
       uses: softprops/action-gh-release@v1
