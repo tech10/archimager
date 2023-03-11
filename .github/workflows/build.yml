@@ -19,7 +19,7 @@ jobs:
     - name: update packages
       run: pacman --noconfirm -Syu
     - name: install packages
-      run: pacman --noconfirm --needed -S arch-install-scripts syslinux parted gptfdisk dosfstools git
+      run: pacman --noconfirm --needed -S arch-install-scripts syslinux parted gptfdisk dosfstools git nodejs-lts-gallium
     - name: checkout
       uses: actions/checkout@v3
     - name: build hybred image
@@ -38,5 +38,4 @@ jobs:
       if: contains(github.ref, '/tags/')
       uses: softprops/action-gh-release@v1
       with:
-        prerelease: ${{ endsWith(github.ref, '-dev') }}
         files: '*.gz'
