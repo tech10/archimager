@@ -29,6 +29,8 @@ check mkdir -p ${imgdir}
 check mount -v -o noatime ${loopdev}p1 ${imgdir}
 check pacstrap -c ${imgdir} base linux syslinux openssh nano ed wget rsync zram-generator
 check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
+check mkdir -pv ${imgdir}/boot/syslinux/
+check cp -v ${imgdir}/usr/lib/syslinux/bios/*.c32 ${imgdir}/boot/syslinux/
 check syslinux-install_update -c ${imgdir} -i -a -m
 check cp -v ./syslinux-bios.cfg ${imgdir}/boot/syslinux/syslinux.cfg
 check chown root:root -v ${imgdir}/boot/syslinux/syslinux.cfg
