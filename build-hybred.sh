@@ -41,7 +41,7 @@ check cp -v ./syslinux.cfg ${imgdir}/boot/syslinux/
 check chown -v root:root ${imgdir}/boot/syslinux/syslinux.cfg
 check mkdir -pv ${imgdir}/boot/EFI/BOOT
 check cp -rv ${imgdir}/usr/lib/syslinux/efi64/* ${imgdir}/boot/EFI/BOOT/
-check mv -v ${imgdir}/boot/EFI/BOOT/syslinux.efi ${imgdir}/boot/EFI/BOOT/bootx64.efi
+check mv -v ${imgdir}/boot/EFI/BOOT/syslinux.efi ${imgdir}/boot/EFI/BOOT/BOOTX64.EFI
 check cp -v ./syslinux.cfg ${imgdir}/boot/EFI/BOOT/syslinux.cfg
 check chown root:root -v ${imgdir}/boot/EFI/BOOT/syslinux.cfg
 check cp -rv ./systemd/* ${imgdir}/etc/systemd/
