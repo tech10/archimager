@@ -2,7 +2,6 @@
 # Perform on all installs.
 check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
 check cp -rv ./systemd/* ${imgdir}/etc/systemd/
-check chown root:root -Rv ${imgdir}/etc/systemd/*
 check ln -svf /run/systemd/resolve/stub-resolv.conf ${imgdir}/etc/resolv.conf
 check chroot ${imgdir} /usr/bin/passwd -d root
 sshkeys="${HOME}/.ssh/authorized_keys"
