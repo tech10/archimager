@@ -5,14 +5,7 @@
 # arch-install-scripts
 # These images are designed to boot on a Linode and do not include their own kernel.
 . ./common-functions.sh
-check truncate -s 700M ${archimg}
-loopdev=$(check losetup -P -f --show ${archimg})
-check mkfs.ext4 -m 0 ${loopdev}
-check mkdir -p ${imgdir}
-check mount -v -o noatime ${loopdev} ${imgdir}
+. ./common-part-linode.sh
 pkg_inst $pkgs_all
-fstabinfo() {
-echo "/dev/sda / ext4 rw,noatime 0 1"
-}
-fstabinfo >>${imgdir}/etc/fstab
+. ./common-fstab-linode.sh
 . ./common-tasks.sh

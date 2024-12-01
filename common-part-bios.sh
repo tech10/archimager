@@ -1,6 +1,6 @@
 #!/bin/bash
 # Partition for BIOS
-check truncate -s 1024M ${archimg}
+check truncate -s ${ldevs_b} ${archimg}
 loopdev=$(check losetup -P -f --show ${archimg})
 check parted -s ${loopdev} mklabel msdos
 check parted -s ${loopdev} mkpart primary ext4 1MiB 100%

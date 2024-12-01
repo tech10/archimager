@@ -1,6 +1,6 @@
 #!/bin/bash
 # Create disk image, format it for EFI, and mount it.
-check truncate -s 1228M ${archimg}
+check truncate -s ${ldevs_e} ${archimg}
 loopdev=$(check losetup -P -f --show ${archimg})
 check parted -s ${loopdev} mklabel gpt
 check parted -s ${loopdev} mkpart EFI fat32 1MiB 201MiB
