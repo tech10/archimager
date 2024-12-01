@@ -16,3 +16,6 @@ fi
 pkg_inst() {
 check pacstrap -c ${imgdir} "$@"
 }
+execsh() {
+chroot ${imgdir} /usr/bin/bash -c "$(cat $@)"
+}
