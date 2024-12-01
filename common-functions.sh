@@ -1,10 +1,13 @@
 #!/bin/bash
 . ./common-vars.sh
-# Common functions.
+# Stop immediately on undeclared variable or error.
+set -euo pipefail
+# Check for root execution.
 if [ $EUID -ne 0 ]; then
 echo "This script requires root to build an image."
 exit 10
 fi
+# Common functions.
 check() {
 "$@"
 local status=$?
@@ -17,5 +20,5 @@ pkg_inst() {
 check pacstrap -c ${imgdir} "$@"
 }
 execsh() {
-chroot ${imgdir} /usr/bin/bash -c "$(cat $@)"
+check chroot ${imgdir} /usr/bin/bash -c "$(check cat $@)"
 }
