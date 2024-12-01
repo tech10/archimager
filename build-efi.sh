@@ -5,58 +5,9 @@
 # arch-install-scripts syslinux parted gptfdisk dosfstools
 # These images are designed to boot on an EFI.
 # They will work with the serial console by default, which is known to work with Linode, and possibly other VM hosts.
-if [ $EUID -ne 0 ]; then
-echo "This script requires root to build an image."
-exit 10
-fi
-check() {
-eval $@
-if [ $? -ne 0 ]; then
-echo $@
-echo "Command failed to execute."
-exit 10
-fi
-}
-archimg="./arch.img"
-check truncate -s 1228M ${archimg}
-loopdev=$(check losetup -P -f --show ${archimg})
-check parted -s ${loopdev} mklabel gpt
-check parted -s ${loopdev} mkpart EFI fat32 1MiB 201MiB
-check parted -s ${loopdev} set 1 esp on
-check parted -s ${loopdev} mkpart AROOT ext4 201MiB 100%
-check mkfs.ext4 -m 0 -L AROOT ${loopdev}p2
-check mkfs.vfat -F 32 -n ABOOT ${loopdev}p1
-imgdir="./image"
-check mkdir -p ${imgdir}
-check mount -v -o noatime ${loopdev}p2 ${imgdir}
-check mkdir -p ${imgdir}/boot
-check mount -v -o noatime ${loopdev}p1 ${imgdir}/boot
-check pacstrap -c ${imgdir} base linux efibootmgr dosfstools gptfdisk openssh nano ed wget rsync zram-generator
-check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
-check cp -rv ./systemd/* ${imgdir}/etc/systemd/
-check chown root:root -Rv ${imgdir}/etc/systemd/*
-check ln -svf /run/systemd/resolve/stub-resolv.conf ${imgdir}/etc/resolv.conf
-check chroot ${imgdir} /usr/bin/passwd -d root
-fstabinfo() {
-echo "LABEL=AROOT / ext4 rw,noatime 0 1"
-echo "LABEL=ABOOT /boot vfat rw,noatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro 0 2"
-}
-fstabinfo >>${imgdir}/etc/fstab
-sshkeys="${HOME}/.ssh/authorized_keys"
-sshdir="${imgdir}/root/.ssh"
-if [ -f "${sshkeys}" ]; then
-echo "Copying ${sshkeys} to ${sshdir}"
-check mkdir -p ${sshdir}
-check cp ${sshkeys} ${sshdir}
-check chmod 700 -v ${sshdir}
-check chmod 600 -v ${sshdir}/authorized_keys
-check chown root:root -Rv ${sshdir}
-fi
-check bootctl --root=${imgdir} --no-variables install
-check cp -rv ./systemd-boot/loader ${imgdir}/boot/
-check chown root:root -Rv ${imgdir}/boot/loader
-check systemctl --root=${imgdir} enable systemd-boot-update
-check sync
-check umount -Rv ${imgdir}
-check rm -rv ${imgdir}
-check losetup -vd ${loopdev}
+. ./common-functions.sh
+. ./common-part-efi.sh
+pkg_inst $pkgs_all $pkgs_efi $pkgs_kernel
+. ./common-boot-efi.sh
+. ./common-fstab-efi.sh
+. ./common-tasks.sh
