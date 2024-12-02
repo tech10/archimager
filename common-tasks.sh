@@ -14,5 +14,15 @@ check chmod 700 -v ${sshdir}
 check chmod 600 -v ${sshdir}/authorized_keys
 check chown root:root -Rv ${sshdir}
 fi
+customscript="custom.sh"
+customscriptpath="${imgdir}/root/${customscript}"
+customsvc="custom.service"
+if [ -f "${customscript}" ]; then
+echo "Custom script exists."
+check cp -v "${customscript}" "${customscriptpath}"
+check chmod -v +x "${customscriptpath}"
+customsystemdsvc >${imgdir}/etc/systemd/system/${customsvc}
+systemctl --root=${imgdir} enable "${customsvc}"
+fi
 check cp -av ./scripts ${imgdir}/root/
 . ./common-cleanup.sh

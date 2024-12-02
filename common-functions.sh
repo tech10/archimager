@@ -48,3 +48,26 @@ exit 1
 fi
 echo "$partition_path"
 }
+customsystemdsvc() {
+cat <<'EOF'
+[Unit]
+Description=Custom Script Execution Service
+After=network.target
+
+[Service]
+Type=oneshot
+Environment=CUSTOM_SCRIPT=/root/custom.sh
+ExecStart=/bin/bash $CUSTOM_SCRIPT
+ExecPost=/bin/bash -c '\
+systemctl disable %n; \
+rm -fv /etc/systemd/system/%n; \
+rm -fv $CUSTOM_SCRIPT; \
+systemctl daemon-reload'
+StandardOutput=tty
+StandardError=tty
+TTYPath=/dev/console
+
+[Install]
+WantedBy=multi-user.target
+EOF
+}

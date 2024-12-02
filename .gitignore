@@ -2,3 +2,4 @@ image/
 *.img
 *.img.gz
 log/
+custom.sh

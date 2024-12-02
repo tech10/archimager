@@ -10,6 +10,10 @@ All build scripts except build-all.sh can build an image on any device you choos
 ./build-bios.sh /dev/sda
 You'll be warned that you are about to format the device and given the option to terminate if you do not wish to continue.
 
+The scripts folder will be copied over to /root for manual execution upon system boot.
+
+If you create a custom.sh script which is ignored by git, this script will be copied to /root and a systemd unit file will be created at /etc/systemd/system and enabled. Upon boot, this service will execute the /root/custom.sh script, and once execution completes, the /root/custom.sh script will be removed, the service file disabled and removed. All standard output and standard error will be piped to /dev/console so you can monitor what your script is doing upon first boot. Since the serial console ttyS0 is currently the default console as specified within the boot loader, this is where output should be directed.
+
 It is best to clone this repository, then copy the files within over to a new directory where you will build your images, unless I some day create a GitHub action to build images upon a manual run and publish them to a release.
 
 The compress.sh script will compress the built image.
