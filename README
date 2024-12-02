@@ -4,7 +4,11 @@ I found myself creating images more than I expected, so I wrote this script to b
 
 This script requires root privileges. You may or may not have luck using sudo to run this script.
 
-The build.sh script in the directory will build the image for you, when run as root.
+The build-*.sh scripts in the directory will build the image for you, when run as root. The build-all.sh script will build all available images. The scripts are named for what type of image they will build, bios, efi, hybrid (will boot from bios or efi), and linode (this builds an image designed for a Linode without a kernel, which is a single unformatted EXT4 device).
+
+All build scripts except build-all.sh can build an image on any device you choose to format, as well as build into a .img file, simply provide the device as an argument, such as:
+./build-bios.sh /dev/sda
+You'll be warned that you are about to format the device and given the option to terminate if you do not wish to continue.
 
 It is best to clone this repository, then copy the files within over to a new directory where you will build your images, unless I some day create a GitHub action to build images upon a manual run and publish them to a release.
 
