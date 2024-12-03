@@ -4,8 +4,8 @@ echo "Enabling systemd services."
 check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
 echo "Copying systemd files."
 check cp -rv ./systemd/* ${imgdir}/etc/systemd/
-echo "Setting resolve.conf"
-check ln -svf /run/systemd/resolve/stub-resolv.conf ${imgdir}/etc/resolv.conf
+echo "Setting resolv.conf"
+check chroot ${imgdir} /usr/bin/ln -svf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 echo "Setting time zone: ${tz}"
 check chroot ${imgdir} /usr/bin/ln -svf "/usr/share/zoneinfo/${tz}" /etc/localtime
 echo "Clearing root password."
