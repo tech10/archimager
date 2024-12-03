@@ -58,7 +58,7 @@ After=network.target
 Type=oneshot
 Environment=CUSTOM_SCRIPT=/root/custom.sh
 ExecStart=/bin/bash $CUSTOM_SCRIPT
-ExecPost=/bin/bash -c '\
+ExecStopPost=/bin/bash -c '\
 systemctl disable %n; \
 rm -fv /etc/systemd/system/%n; \
 rm -fv $CUSTOM_SCRIPT; \
