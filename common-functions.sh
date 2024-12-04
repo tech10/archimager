@@ -71,3 +71,14 @@ TTYPath=/dev/console
 WantedBy=multi-user.target
 EOF
 }
+keymapwrite() {
+local km="$1"
+cat <<EOF
+# Written by custom Arch Linux imaging scripts, read by systemd-localed
+# and systemd-vconsole-setup(8). Use localectl(1) to update this file.
+KEYMAP=$km
+XKBLAYOUT=$km
+XKBMODEL=pc105+inet
+XKBOPTIONS=terminate:ctrl_alt_bksp
+EOF
+}
