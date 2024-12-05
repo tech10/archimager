@@ -9,7 +9,7 @@ exit 10
 fi
 # Common functions.
 check() {
-"$@"
+$@
 local status=$?
 if [[ $status -ne 0 ]]; then
 echo "Error: Command '$@' failed with exit code $status" >&2

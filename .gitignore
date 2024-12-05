@@ -3,3 +3,4 @@ image/
 *.img.gz
 log/
 custom.sh
+customfs/
