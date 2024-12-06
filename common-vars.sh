@@ -3,18 +3,18 @@
 archimg="./arch.img"
 imgdir="./image"
 # BIOS image size
-ldevs_b="1024M"
+ldevs_b="1126M"
 # EFI image size
-ldevs_e="1228M"
+ldevs_e="1331M"
 # Linode image size
-ldevs_l="700M"
+ldevs_l="819M"
 # Packages
-pkgs_all="base openssh nano ed wget rsync"
+pkgs_all="base openssh nano ed wget rsync mosh reflector"
 pkgs_efi="efibootmgr dosfstools gptfdisk"
 pkgs_kernel="linux zram-generator"
 pkgs_bootldr="syslinux"
 # Systemd services
-svcs="sshd systemd-networkd systemd-resolved systemd-timesyncd"
+svcs="sshd systemd-networkd systemd-resolved systemd-timesyncd reflector.timer"
 # Root file system directory
 rootfs="./rootfs"
 # Time zone
