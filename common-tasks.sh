@@ -1,9 +1,9 @@
 #!/bin/bash
 # Perform on all installs.
 echo "Enabling systemd services."
-check systemctl --root=${imgdir} enable sshd systemd-networkd systemd-resolved systemd-timesyncd
+check systemctl --root=${imgdir} enable ${svcs}
 echo "Copying rootfs files."
-check cp -rv ./rootfs/* ${imgdir}/
+check cp -rv ${rootfs}/* ${imgdir}/
 echo "Setting resolv.conf"
 check chroot ${imgdir} /usr/bin/ln -svf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 echo "Setting time zone: ${tz}"
@@ -23,8 +23,6 @@ echo "Setting keymap to ${KEYMAP}."
 keymapwrite $KEYMAP >${imgdir}/etc/vconsole.conf
 echo "Clearing root password."
 check chroot ${imgdir} /usr/bin/passwd -d root
-sshkeys="${HOME}/.ssh/authorized_keys"
-sshdir="${imgdir}/root/.ssh"
 if [ -f "${sshkeys}" ]; then
 echo "Copying ${sshkeys} to ${sshdir}"
 check mkdir -p ${sshdir}
