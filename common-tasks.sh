@@ -1,9 +1,9 @@
 #!/bin/bash
 # Perform on all installs.
-echo "Enabling systemd services."
-check systemctl --root=${imgdir} enable ${svcs}
 echo "Copying rootfs files."
 check cp -rv ${rootfs}/* ${imgdir}/
+echo "Enabling systemd services."
+check systemctl --root=${imgdir} enable ${svcs}
 echo "Setting resolv.conf"
 check chroot ${imgdir} /usr/bin/ln -svf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 echo "Setting time zone: ${tz}"

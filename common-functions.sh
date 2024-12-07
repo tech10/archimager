@@ -17,7 +17,7 @@ exit $status
 fi
 }
 pkg_inst() {
-check pacstrap -c ${imgdir} "$@"
+check pacstrap -c -G -M ${imgdir} $@
 }
 execsh() {
 check chroot ${imgdir} /usr/bin/bash -c "$(check cat $@)"

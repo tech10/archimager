@@ -14,7 +14,7 @@ pkgs_efi="efibootmgr dosfstools gptfdisk"
 pkgs_kernel="linux zram-generator"
 pkgs_bootldr="syslinux"
 # Systemd services
-svcs="sshd systemd-networkd systemd-resolved systemd-timesyncd reflector.timer"
+svcs="sshd systemd-networkd systemd-resolved systemd-timesyncd reflector.timer reflector.service pacman-init"
 # Root file system directory
 rootfs="./rootfs"
 # Time zone

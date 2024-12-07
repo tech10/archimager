@@ -1,0 +1,20 @@
+[Unit]
+Description=Initializes Pacman keyring
+ConditionPathExists=!/etc/pacman.d/gnupg
+After=time-sync.target
+Before=archlinux-keyring-wkd-sync.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/pacman-key --init
+ExecStart=/usr/bin/pacman-key --populate
+ExecStartPost=/usr/bin/systemctl disable %n
+ExecStartPost=/usr/bin/rm -fv /etc/systemd/system/%n
+ExecPost=/usr/bin/systemctl daemon-reload
+#StandardOutput=tty
+#StandardError=tty
+#TTYPath=/dev/console
+
+[Install]
+WantedBy=multi-user.target
