@@ -9,7 +9,7 @@ ldevs_e="1331M"
 # Linode image size
 ldevs_l="819M"
 # Packages
-pkgs_all="base openssh nano ed wget rsync mosh reflector"
+pkgs_all="base openssh nano ed wget rsync mosh reflector tmux"
 pkgs_efi="efibootmgr dosfstools gptfdisk"
 pkgs_kernel="linux zram-generator"
 pkgs_bootldr="syslinux"
