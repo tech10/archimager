@@ -26,9 +26,11 @@ devset() {
 local size=$1
 local device=${2:-}
 if [ -z "$device" ]; then
+dev_type="loop"
 check truncate -s ${size} ${archimg}
 diskdev=$(check losetup -P -f --show ${archimg})
 else
+dev_type="custom"
 diskdev="$device"
 trap 'echo "Terminated."; exit 1' SIGINT
 echo "WARNING!!!" >&2
