@@ -8,7 +8,7 @@ img_e="./arch-efi.img.gz"
 img_h="./arch-hybrid.img.gz"
 img_comp="${archimg}.gz"
 logd="./log"
-mkdir $logd
+mkdir -p $logd
 builder() {
 local script=$1
 local imggz=$2
