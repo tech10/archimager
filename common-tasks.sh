@@ -43,4 +43,7 @@ if [ -d "${customfs}" ]; then
 echo "Custom file system directory exists. Copying content."
 check cp -rv "${customfs}/*" "${imgdir}/"
 fi
+echo Initializing and generating pacman keyring.
+check systemd-nspawn --capability=CAP_IPC_LOCK -D ${imgdir} "/usr/bin/pacman-key --init"
+check systemd-nspawn --capability=CAP_IPC_LOCK -D ${imgdir} "/usr/bin/pacman-key --populate"
 . ./common-cleanup.sh
