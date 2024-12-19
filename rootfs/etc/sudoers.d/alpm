@@ -1,0 +1,1 @@
+%alpm ALL=(ALL:ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/pacman-db-upgrade, /usr/bin/pacman-key
