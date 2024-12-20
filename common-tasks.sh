@@ -2,6 +2,8 @@
 # Perform on all installs.
 echo "Copying rootfs files."
 check cp -rv ${rootfs}/* ${imgdir}/
+echo "Modifying sudoers.d permissions."
+check chmod 0440 -Rv ${imgdir}/etc/sudoers.d/*
 echo "Enabling systemd services."
 check systemctl --root=${imgdir} enable ${svcs}
 echo "Setting resolv.conf"
