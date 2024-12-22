@@ -10,8 +10,8 @@ rootdev=$(get_partition_path $diskdev 2)
 check mkfs.ext4 -m 0 -L AROOT ${rootdev}
 check mkfs.vfat -F 32 -n ABOOT ${bootdev}
 check mkdir -p ${imgdir}
-check mount -v -o noatime ${rootdev} ${imgdir}
+check mount -v ${rootdev} ${imgdir}
 check mkdir -p ${imgdir}/boot
-check mount -v -o noatime ${bootdev} ${imgdir}/boot
+check mount -v ${bootdev} ${imgdir}/boot
 bootuuid=$(check lsblk -no UUID ${bootdev})
 rootuuid=$(check lsblk -no UUID ${rootdev})

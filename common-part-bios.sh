@@ -7,5 +7,5 @@ check parted -s ${diskdev} set 1 boot on
 rootdev=$(get_partition_path $diskdev 1)
 check mkfs.ext4 -m 0 -L AROOT ${rootdev}
 check mkdir -p ${imgdir}
-check mount -v -o noatime ${rootdev} ${imgdir}
+check mount -v ${rootdev} ${imgdir}
 rootuuid=$(check lsblk -no UUID ${rootdev})
