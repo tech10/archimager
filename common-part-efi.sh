@@ -2,9 +2,9 @@
 # Create disk image, format it for EFI, and mount it.
 devset ${ldevs_e} ${1:-}
 check parted -s ${diskdev} mklabel gpt
-check parted -s ${diskdev} mkpart EFI fat32 1MiB 201MiB
+check parted -s ${diskdev} mkpart EFI fat32 1MiB 257MiB
 check parted -s ${diskdev} set 1 esp on
-check parted -s ${diskdev} mkpart ext4 201MiB 100%
+check parted -s ${diskdev} mkpart ext4 257MiB 100%
 bootdev=$(get_partition_path $diskdev 1)
 rootdev=$(get_partition_path $diskdev 2)
 check mkfs.ext4 -m 0 -L AROOT ${rootdev}

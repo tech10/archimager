@@ -3,11 +3,11 @@
 archimg="./arch.img"
 imgdir="./image"
 # BIOS image size
-ldevs_b="1126M"
+ldevs_b="1228M"
 # EFI image size
-ldevs_e="1331M"
+ldevs_e="1432M"
 # Linode image size
-ldevs_l="819M"
+ldevs_l="922M"
 # Packages
 pkgs_all="base sudo openssh nano ed wget rsync mosh reflector tmux"
 pkgs_efi="efibootmgr dosfstools gptfdisk"
