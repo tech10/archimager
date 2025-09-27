@@ -4,7 +4,7 @@ bootkernel="vmlinuz-linux"
 bootinitrd="initramfs-linux.img"
 bootinitrdfallback="initramfs-linux-fallback.img"
 kernelcmdline() {
-echo "root=UUID=${rootuuid} rw console=ttyS0,19200n8 audit=0"
+echo "root=UUID=${rootuuid} rw console=tty0 console=ttyS0,19200n8 audit=0"
 }
 syslinuxcfg() {
 local bootpath=$1
