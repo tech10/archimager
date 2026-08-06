@@ -6,3 +6,4 @@ systemdbootcfgldr >${imgdir}/boot/loader/loader.conf
 systemdbootcfgarch / >${imgdir}/boot/loader/entries/arch.conf
 systemdbootcfgarchfallback / >${imgdir}/boot/loader/entries/archfallback.conf
 check systemctl --root=${imgdir} enable systemd-boot-update
+. ./common-boot-tasks.sh
