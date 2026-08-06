@@ -4,4 +4,4 @@
 echo Creating fallback initrd.
 echo IMPORTANT!!!
 echo This fallback image will not be recreated upon kernel upgrades.
-check chroot ${imgdir} /usr/bin/mkinitcpio -g /boot/${bootinitrdfallback} -S autodetect
+check arch-chroot ${imgdir} /usr/bin/mkinitcpio -k /boot/${bootkernel} -g /boot/${bootinitrdfallback} -S autodetect
